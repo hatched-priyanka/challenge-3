@@ -22,8 +22,12 @@ function valueToJSON(value: number | string | boolean): string {
     : value.toString();
 }
 
-function objToJSON(obj: object): string {
-  let result = `{`;
+type objectFormat = {
+  [key: string]: unknown;
+};
+
+function objToJSON(obj: objectFormat): string {
+  let result: string = `{`;
   for (let key in obj) {
     let val: unknown = obj[key];
     result += `"${key}":`;
@@ -47,7 +51,7 @@ function objToJSON(obj: object): string {
 }
 
 function arrToJSON(arr: unknown[]) {
-  let result = `[`;
+  let result: string = `[`;
   arr.map((val, i) => {
     if (
       typeof val === "string" ||
@@ -66,13 +70,3 @@ function arrToJSON(arr: unknown[]) {
   });
   return `${result}]`;
 }
-
-// type ValidJSON = ValidJSONObject // | ... | ... | ...
-
-// interface ValidJSONObject {
-//   // ...
-// }
-
-// export const stringify = (input: any): string => (
-//   '""'
-// );
